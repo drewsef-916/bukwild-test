@@ -2,14 +2,14 @@
   <div id="app" :class="currentMarqueeBackground">
     <header>
       <section>
-        <img src="@/assets/abc_logo.svg"/>
+        <img class="logo" src="@/assets/abc_logo.svg"/>
         <nav>
-          <a :click="updateMarqueeBody('Industries')">Industries</a>
-          <a :click="updateMarqueeBody('Services')">Services</a>
-          <a :click="updateMarqueeBody('About Us')">About Us</a>
+          <a class="nav-item" v-on:click="updateMarqueeBody('Industries')">Industries</a>
+          <a class="nav-item" v-on:click="updateMarqueeBody('Services')">Services</a>
+          <a class="nav-item" v-on:click="updateMarqueeBody('About Us')">About Us</a>
         </nav>
       </section>
-      <button>
+      <button class="contact">
         Contact Us
       </button>
     </header>
@@ -25,36 +25,46 @@ import { pages } from "@/assets/content.json";
 export default {
   // name: "App",
   components: {
-    MarqueeBody 
+    MarqueeBody
   },
   data() {
     return {
       marqueeList: pages,
-      currentMarqueeBody: pages[0]
+      currentMarqueeBody: {}
     }
   },
   methods: {
     updateMarqueeBody: function(title) {
-      // console.log(this.marqueeList);
-      console.log(title);
-      const correctBody = this.marqueeList.forEach(item => console.log(item.title));
-      console.log(correctBody);
-    },
+      const [marqueeBody] = this.marqueeList.filter(item => item.title === title);
+      this.currentMarqueeBody = marqueeBody;
+      console.log(this.currentMarqueeBody);
+    }
   },
-  mounted() {
-    // console.log(this.currentMarqueeBody);
+  created() {
+    // set initial marquee body to the first option, industries, on render
+    this.currentMarqueeBody = this.marqueeList[0];
   },
   computed: {
     currentMarqueeBackground: function() {
-      return this.currentMarqueeBody.title.toLowerCase();
-    } 
+      return this.currentMarqueeBody.slug;
+    }
   }
 };
 </script>
 
 <style lang="scss">
+html {
+  font-size: 14px;
+}
 body {
   margin: 0;
+}
+header {
+  display: flex;
+  justify-content: space-between;
+}
+a, button {
+  cursor: pointer;
 }
 #app {
   // -webkit-font-smoothing: antialiased;
@@ -63,16 +73,30 @@ body {
   min-height: 100vh;
   color: #fff;
   padding: 10px;
-  background-size: cover;
 
   &.industries {
     background: url("./assets/slide_one.jpg") no-repeat center center;
+    background-size: cover;
   }
   &.services {
     background: url("./assets/slide_two.jpg") no-repeat center center;
+    background-size: cover;
   }
-  &.contact-us {
+  &.about-us {
     background: url("./assets/slide_three.jpg") no-repeat center center;
+    background-size: cover;
   }
+}
+.nav-item {
+  display: block;
+  padding: 10% 0;
+}
+.contact {
+  height: 2rem;
+  min-height: 2rem;
+  padding: .5rem 1rem;
+  background-color: transparent;
+  color: #fff;
+  border: 1px solid #fff;
 }
 </style>
