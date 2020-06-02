@@ -1,30 +1,19 @@
 <template>
   <div id="app" :class="currentMarqueeBackground">
-    <header>
-      <section>
-        <img class="logo" src="@/assets/abc_logo.svg"/>
-        <nav>
-          <a class="nav-item" v-on:click="updateMarqueeBody('Industries')">Industries</a>
-          <a class="nav-item" v-on:click="updateMarqueeBody('Services')">Services</a>
-          <a class="nav-item" v-on:click="updateMarqueeBody('About Us')">About Us</a>
-        </nav>
-      </section>
-      <button class="contact">
-        Contact Us
-      </button>
-    </header>
+    <DefaultLayout :marqueeList="marqueeList" @updateMarqueeBody="updateMarqueeBody"></DefaultLayout>
     <MarqueeBody v-bind="currentMarqueeBody"></MarqueeBody>
   </div>
 </template>
 
 <script>
+import DefaultLayout from "./layouts/DefaultLayout.vue";
 import MarqueeBody from "./components/MarqueeBody.vue";
 
 import { pages } from "@/assets/content.json";
 
 export default {
-  // name: "App",
   components: {
+    DefaultLayout,
     MarqueeBody
   },
   data() {
@@ -37,7 +26,6 @@ export default {
     updateMarqueeBody: function(title) {
       const [marqueeBody] = this.marqueeList.filter(item => item.title === title);
       this.currentMarqueeBody = marqueeBody;
-      console.log(this.currentMarqueeBody);
     }
   },
   created() {
@@ -57,22 +45,14 @@ html {
   font-size: 14px;
 }
 body {
+  font-size: calc(14px + 0.2vw);
   margin: 0;
 }
-header {
-  display: flex;
-  justify-content: space-between;
-}
-a, button {
-  cursor: pointer;
-}
 #app {
-  // -webkit-font-smoothing: antialiased;
-  // -moz-osx-font-smoothing: grayscale;
   font-family: Helvetica, Arial, sans-serif;
   min-height: 100vh;
   color: #fff;
-  padding: 10px;
+  padding: 0 10px;
 
   &.industries {
     background: url("./assets/slide_one.jpg") no-repeat center center;
@@ -86,17 +66,5 @@ a, button {
     background: url("./assets/slide_three.jpg") no-repeat center center;
     background-size: cover;
   }
-}
-.nav-item {
-  display: block;
-  padding: 10% 0;
-}
-.contact {
-  height: 2rem;
-  min-height: 2rem;
-  padding: .5rem 1rem;
-  background-color: transparent;
-  color: #fff;
-  border: 1px solid #fff;
 }
 </style>

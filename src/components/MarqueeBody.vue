@@ -15,7 +15,6 @@
 </template>
 
 <script>
-
 export default {
   props: ["blocks"],
   data: function() {
@@ -39,27 +38,63 @@ export default {
 </script>
 
 <style lang="scss">
-  .headline, .subheadline {
-    color: #fff
-  }
-  .headings {
-    display: flex;
+@import "@/scss/mixins.scss";
 
-    h1, h3 {
-      flex-basis: 50%;
-    }
+main {
+  @include responsive(width, 300px, 80%, 1440px);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0 auto;
+}
+.headline, .subheadline {
+  color: #fff
+}
+.headings {
+  @include responsive(height, 46vh, auto, none);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  h1, h3 {
+    @include responsive(width, 300px, 50%, 50%);
   }
-  .cta {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #fff;
-    color: #000;
-    width: 80%;
-    margin: 0 auto;
+  h1 {
+    font-size: calc(42px + 0.2vw);
   }
-  .icon {
-    color: #ffc001;
-    font-size: 1.5rem;
+  h3 {
+    font-size: calc(12px + 0.2vw);
+    font-weight: 300;
   }
+}
+.cta {
+  @include responsive(height, 120px, 25vh, 200px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0 0.5rem;
+  background-color: #fff;
+  color: #000;
+
+  > span {
+    font-weight: 600;
+    text-align: center;
+  }
+}
+.lets-talk {
+  font-size: calc(10px + 0.2vw);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+
+  > span {
+    padding: 0.5rem 1rem;
+  }
+}
+.icon {
+  color: #ffc001;
+  font-size: 1.5rem;
+}
 </style>

@@ -1,0 +1,14 @@
+@mixin responsive($property, $min, $default, $max) {
+    min-#{$property}: $min;
+    #{$property}: $default;
+    max-#{$property}: $max;
+}
+
+@mixin onHover($elemColor, $hoverColor) {
+    color: $elemColor;
+    transition: color 0.25s;
+
+    &:hover {
+        color: $hoverColor;
+    }
+}
