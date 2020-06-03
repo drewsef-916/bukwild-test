@@ -52,6 +52,7 @@ body {
   font-family: Helvetica, Arial, sans-serif;
   min-height: 100vh;
   color: #fff;
+  background-color: #222;
   padding: 0 10px;
 
   &.industries {
