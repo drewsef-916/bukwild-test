@@ -32,13 +32,6 @@ export default {
     // set initial marquee body to the first option, industries, on render
     this.currentMarqueeBody = this.marqueeList[0];
   },
-  mounted() {
-    // pre-load images for the backgrounds on the other marquee states
-    let servicesBg = new Image();
-    let aboutUsBg = new Image();
-    servicesBg.src = "./assets/slide_two.jpg";
-    aboutUsBg.src = "./assets/slide_three.jpg";
-  },
   computed: {
     currentMarqueeBackground: function() {
       return this.currentMarqueeBody.slug;
